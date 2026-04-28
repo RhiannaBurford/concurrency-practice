@@ -9,7 +9,7 @@ public class Editor implements Runnable{
     @Override 
     public void run(){
         for (int i = 0; i < 1000; i++){
-            d.addWords(i);
+            d.addWords(1);
         }
     }
 }

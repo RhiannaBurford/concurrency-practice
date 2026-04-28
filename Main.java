@@ -2,22 +2,26 @@ public class Main {
 
     public static void main (String[] args){
 
-        Inventory i = new Inventory();
-        DeliveryTruck d1 = new DeliveryTruck(i);
-        Thread thread1 = new Thread(d1);
-        Thread thread2 = new Thread(d1);
-        thread1.start();
-        thread2.start();
+        Document d = new Document();
+        Editor e1 = new Editor(d);
+        Editor e2 = new Editor(d);
+        Editor e3 = new Editor(d);
+        Thread t1 = new Thread(e1);
+        Thread t2 = new Thread(e2);
+        Thread t3 = new Thread(e3);
+        t1.start();
+        t2.start();
+        t3.start();
 
-        try{
-            thread1.join();
-            thread2.join();
+        try {
+            t1.join();
+            t2.join();
+            t3.join();
         }
         catch (InterruptedException e){
-            System.out.println("Error with interrupt");
+            System.out.println("Thread was interrupted");
         }
 
-        System.out.println("Final num items: " + i.getItemsInStock());
-    
+        System.out.println(d.getWordCount());
     }
 }
