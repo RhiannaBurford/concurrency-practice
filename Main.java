@@ -4,14 +4,13 @@ public class Main {
         MessagePrinter mp = new MessagePrinter(); // Create instance
         Thread thread = new Thread(mp);           // Create thread
         thread.start();                           // Start the thread
-        for (int i = 0; i < 5; i++){
-            System.out.println("Hello from MAIN");
-            try {
-                Thread.sleep(100);
-            }
-            catch (InterruptedException e){
-                System.out.println("Thread was interrupted.");
-            }
+        try{
+            thread.join();
         }
+        catch (InterruptedException e){
+            System.out.println("Error with thread.");
+        }
+        
+        System.out.println("The background thread is finally done! Now MAIN can finish.");
     }
 }
