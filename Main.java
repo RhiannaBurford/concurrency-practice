@@ -1,16 +1,21 @@
 public class Main {
 
     public static void main (String[] args){
-        MessagePrinter mp = new MessagePrinter(); // Create instance
-        Thread thread = new Thread(mp);           // Create thread
-        thread.start();                           // Start the thread
-        try{
-            thread.join();
+        BankAccount ba = new BankAccount();
+        Transaction tr = new Transaction(ba);
+        Thread t1 = new Thread(tr);
+        Thread t2 = new Thread(tr);
+        t1.start();
+        t2.start();
+        try {
+            t1.join();
+            t2.join();
         }
         catch (InterruptedException e){
-            System.out.println("Error with thread.");
+            System.out.println("error in thread.");
         }
         
-        System.out.println("The background thread is finally done! Now MAIN can finish.");
+
+        System.out.println(ba.getBalance());
     }
 }
