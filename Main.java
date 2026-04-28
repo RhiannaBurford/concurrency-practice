@@ -6,6 +6,12 @@ public class Main {
         thread.start();                           // Start the thread
         for (int i = 0; i < 5; i++){
             System.out.println("Hello from MAIN");
+            try {
+                Thread.sleep(100);
+            }
+            catch (InterruptedException e){
+                System.out.println("Thread was interrupted.");
+            }
         }
     }
 }
