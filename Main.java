@@ -2,14 +2,23 @@ public class Main {
 
     public static void main (String[] args){
 
-        Sensor s = new Sensor();
-        Thread t1 = new Thread(s);
+        Worker2 w = new Worker2();
+        Thread t1 = new Thread(w);
         t1.start();
-
-        while (t1.isAlive()){ // while thread is still running
-            Thread.yield();
-            System.out.println("Sensor is still running...");
+        try{
+            Thread.sleep(2000);
         }
-        System.out.println("Scan complete");
+        catch (InterruptedException e){
+            System.out.println("Error in thread.");
+        }
+        t1.interrupt();
+        try {
+            t1.join();
+        }
+        catch (InterruptedException e){
+            System.out.println("Error in thread.");
+        }
+        
+        System.out.println("Main program finished");
     }
 }
