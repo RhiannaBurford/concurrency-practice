@@ -1,21 +1,23 @@
 public class Main {
 
     public static void main (String[] args){
-        BankAccount ba = new BankAccount();
-        Transaction tr = new Transaction(ba);
-        Thread t1 = new Thread(tr);
-        Thread t2 = new Thread(tr);
-        t1.start();
-        t2.start();
-        try {
-            t1.join();
-            t2.join();
+
+        Inventory i = new Inventory();
+        DeliveryTruck d1 = new DeliveryTruck(i);
+        Thread thread1 = new Thread(d1);
+        Thread thread2 = new Thread(d1);
+        thread1.start();
+        thread2.start();
+
+        try{
+            thread1.join();
+            thread2.join();
         }
         catch (InterruptedException e){
-            System.out.println("error in thread.");
+            System.out.println("Error with interrupt");
         }
-        
 
-        System.out.println(ba.getBalance());
+        System.out.println("Final num items: " + i.getItemsInStock());
+    
     }
 }
